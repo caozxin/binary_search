@@ -80,6 +80,9 @@ class Solution:
         
         if nums[0] > target or nums[n-1] < target: # becuase the input numbers is sorted, we check the min and max with the target
             return -1
+        
+        if target == nums[0]:
+            return 0
 
         # Set to keep track of visited positions
         visited = 0
@@ -128,9 +131,62 @@ class Solution:
 
 
         
+    def binary_search(self, arr: List[int], target: int) -> int:
+        left, right = 0, len(arr) - 1
+        while left <= right:  # <= because left and right could point to the same element, < would miss it
+            mid = (left + right) // 2 # double slash for integer division in python 3, we don't have to worry about integer `left + right` overflow since python integers can be arbitrarily large
+            # found target, return its index
+            if arr[mid] == target:
+                return mid
+            # middle less than target, discard left half by making left search boundary `mid + 1`
+            if arr[mid] < target:
+                left = mid + 1
+            # middle greater than target, discard right half by making right search boundary `mid - 1`
+            else:
+                right = mid - 1
+        return -1 # if we get here we didn't hit above return so we didn't find target
+    
+    def last_position_binary_search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        
+        if (type(target) != int) or (n <= 0): # check if nothing in the target 
+            # print("no target", type(target))
+            return -1
+        if target not in nums:
+            return -1
+        
+        if nums[0] > target or nums[n-1] < target: # becuase the input numbers is sorted, we check the min and max with the target
+            return -1
+
+        
+        left, right = 0 , n -1
+        # last_position = 0 
+        
+        while left <= right:
+            mid_point = (left + right) //2
+            if nums[mid_point] == target:
+                last_position = mid_point
+                print("last_position", last_position)
+                while last_position < n:
+                    if nums[last_position ] == target:
+                        last_position +=1 
+                    else:
+                        break
+                return last_position-1
+            # middle less than target, discard left half by making left search boundary `mid + 1`
+            if nums[mid_point] < target:
+                left = mid_point + 1
+            # middle greater than target, discard right half by making right search boundary `mid - 1`
+            else:
+                right = mid_point - 1
+        return -1 # if we get here we didn't hit above return so we didn't find target
+
 
 new_solution = Solution()
-nums = [1,2,3,4,5]
-target = 3
+nums = [1, 2, 2, 4, 5, 5]
+target = 5
 
-new_solution.last_position02(nums, target)
+nums2= [1,1,1,1,1,1,1,1,1,1,1]
+target2 = 1
+result = new_solution.last_position_binary_search(nums2, target2)
+print(result)
