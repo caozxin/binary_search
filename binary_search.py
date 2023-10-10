@@ -49,12 +49,12 @@ class Solution:
             elif arr[mid] < target:
                 return recursive_helper(arr[mid + 1:], target, mid + 1)
             elif arr[mid] > target:
-                return recursive_helper(arr[:mid], target, 0)
+                return recursive_helper(arr[:mid], target, index)
         
         return recursive_helper(arr, target, 0)
 
 new_solution = Solution()
 input_array = [1,3,6,8,9,10]
-target = 9
+target = 8
 result = new_solution.binary_search_rec(input_array, target)
 print("result", result)
