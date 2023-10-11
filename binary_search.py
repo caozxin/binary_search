@@ -34,15 +34,9 @@ class Solution:
         def recursive_helper(arr: List[int], target: int, index: int):
             n = len(arr)
             if n <= 0:
-                return None
-            
-            left, right = 0, n - 1
-            mid = n // 2
-            print("self.mid", self.mid)
+                return -1
 
-            print('n, left, right, mid')
-            print(n, left, right, mid)
-            
+            mid = n // 2
 
             if arr[mid] == target:  # this is the recursion base
                 return index + mid
@@ -54,7 +48,7 @@ class Solution:
         return recursive_helper(arr, target, 0)
 
 new_solution = Solution()
-input_array = [1,3,6,8,9,10]
+input_array = [1, 3, 5, 7, 8]#[1,3,6,8,9,10]
 target = 8
 result = new_solution.binary_search_rec(input_array, target)
 print("result", result)
