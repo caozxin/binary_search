@@ -82,10 +82,26 @@ class Solution:
             return end
 
         return -1
+    def binary_search_classic(self, nums, target):
+        left, right = 0, len(nums) - 1
 
+        while left <= right:
+            mid = left + (right - left) // 2  # Calculate the middle index to avoid overflow. 
+            #And it will be updated when there is any change to left or right
+            another_mid = len(nums) // 2 # overflow occurs when the target idx <= 1
+
+
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        return -1 # this handles all no result cases
 
 new_solution = Solution()
 input_array = [1, 3, 5, 7, 8]#[1,3,6,8,9,10]
-target = 3
-result = new_solution.binary_search_iterative(input_array, target)
+target = 8
+result = new_solution.binary_search_classic(input_array, target)
 print("result", result)
