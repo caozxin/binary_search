@@ -32,7 +32,7 @@ class Solution:
         while left < right: # it has to be left < right here! because when they become equal, it indicates that you've found the mountain top.
             mid = left + (right - left) // 2  # Calculate the middle index to avoid overflow. 
 
-            if nums[mid] <  botton:
+            if nums[mid] <  botton: # looks like this if statement does not capture the two end pointers
                 print("I find it")
                 botton = nums[mid] 
                 print("nums[left]", nums[left])
@@ -42,7 +42,7 @@ class Solution:
             else:
                 right = mid  # continue to left half
 
-        return nums[left]
+        return min(nums[left], nums[right])  # here you can also just return nums[left]
     
 
     def findMin_default(self, nums: List[int]) -> int:
@@ -56,6 +56,7 @@ class Solution:
         return nums[left]                       # 循环结束，left == right，最小值输出nums[left]或nums[right]均可
 
     def findMin_classic(self, nums: List[int]) -> int:
+        
         left, right = 0, len(nums) - 1
         result = -1
         target = nums[-1]
@@ -74,6 +75,22 @@ class Solution:
                 right = mid - 1
 
         return result
+
+
+    def findMin_JZ(self, nums):
+        if not nums:
+            return -1
+            
+        start, end = 0, len(nums) - 1
+        target = nums[-1]
+        while start + 1 < end:			#用来控制区间大小
+            mid = (start + end) // 2
+            if nums[mid] <= target:		#如果mid位置上的数字小于等于最右端的数字时，区间向左移动
+                end = mid
+            else:
+                start = mid
+        return min(nums[start], nums[end])		#最终返回start和end位置上较小的数字即可
+    
 new_solution = Solution()
 nums = [4, 5, 6, 7, 0, 1, 2]
 nums02 = [2,0,1]
