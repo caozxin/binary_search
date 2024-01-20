@@ -18,10 +18,15 @@ class Solution:
         print(expected_nums)
 
         curr_nums = set(nums)
-        result = expected_nums.difference(curr_nums)
-        print(result)
+        result = expected_nums.difference(curr_nums) # set.difference()
+
+        union = expected_nums.union(curr_nums) #set.union()
+
+        intersection = expected_nums.intersection(curr_nums) #set.intersection()
+        print(union, intersection)
 
         return list(result)[0]
+
 
 
         
