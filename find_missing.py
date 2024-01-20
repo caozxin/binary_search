@@ -12,15 +12,20 @@ class Solution:
     def find_missing(self, nums: List[int]) -> int:
         # write your code here
         n = len(nums)
-        left, right = 0, n - 1
+        expected_nums = set()
+        for each in range(n+1):
+            expected_nums.add(each)
+        print(expected_nums)
+
+        curr_nums = set(nums)
+        result = expected_nums.difference(curr_nums)
+        print(result)
+
+        return list(result)[0]
+
+
         
-        while left <= right: 
-            mid = left + (right - left) //2
-            # print(left, right, mid)
-            print("mid, nums[mid]")
-            print(mid, nums[mid])
-            if nums[mid] < mid:  #move to left
-                right = mid - 1
-            else: # move to right
-                left = mid + 1
+            
+            
+
             
