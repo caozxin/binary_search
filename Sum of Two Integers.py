@@ -1,22 +1,12 @@
-#Given two integers a and b, return the sum of the two integers without using the operators + and -.
-
- class Solution:
+class Solution:
     def getSum(self, a: int, b: int) -> int:
-        if not a or not b:
-            return 0
+        mask = 0xFFFFFFFF  # Mask to get the last 32 bits
 
-        max_val = max(a,b)
-        min_val = min(a,b)
-        result_list = []
-        
-        for i in range(max_val):
-            print(i)
-            result_list.append(i)
+        while b != 0:
+            a, b = (a ^ b) & mask, ((a & b) << 1) & mask
 
-        for j in range(min_val):
-            print(j)
-            result_list.append(j)
-
-        print(len(result_list))
-        return len(result_list)
-
+        # Handle overflow for negative numbers
+        if a & (1 << 31):
+            return ~(a ^ mask)
+        else:
+            return a
