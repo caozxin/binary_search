@@ -11,10 +11,11 @@ class Solution:
             mid = (left + right) // 2
             print("mid", mid, left, right)
             if arr[mid] >= arr[mid + 1]: # only update max_arr when arr[mid]  is the local maximum
-                if max_arr <= arr[mid]:
-                    max_arr = arr[mid]
-                    max_idx = mid
-                    print("max_arr", max_arr, max_idx)
+                max_idx = mid
+                # if max_arr <= arr[mid]:
+                #     max_arr = arr[mid]
+                #     max_idx = mid
+                #     print("max_arr", max_arr, max_idx)
                 right = mid - 1 # move to left half
             else:
                 left = mid + 1 # move to right half
