@@ -9,11 +9,10 @@ class Solution:
         while left <= right:
             mid = (left + right) // 2
 
-            if nums[mid] >= target:
-                if nums[mid] == target:
-                    res_idx = mid
-                    return res_idx
-                else:
+            if nums[mid] == target:
+                res_idx = mid
+                return res_idx
+            elif nums[mid] > target:
                     right = mid - 1
             else:
                 left = mid + 1
